@@ -1,0 +1,9 @@
+seal.so
+{
+    global:
+        g_global_data_sim;
+        g_global_data;
+        seal_entry;
+    local:
+        *;
+};

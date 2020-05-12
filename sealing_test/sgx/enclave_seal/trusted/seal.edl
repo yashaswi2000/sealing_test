@@ -1,0 +1,23 @@
+/* seal.edl - Top EDL file. */
+
+enclave {
+	from "sgx_tstdc.edl" import *;
+	    
+    /* 
+     * ocall_seal_sample - invokes OCALL to display string buffer inside the enclave.
+     *  [in]: copy the string buffer to App outside.
+     *  [string]: specifies 'str' is a NULL terminated buffer.
+     */
+    untrusted {
+        void ocall_seal_sample([in, string] const char *str);
+        void ocall_sample([in,count=32] const uint8_t *A);
+    };
+
+
+    trusted {
+    	    public int ecall_seal_sample([in,out]int *value);
+    	    public void ecall_example([in, string]const char *str);
+    	    public uint32_t get_sealed_data_size();
+			public sgx_status_t seal_data([out, size=data_size] uint8_t* sealed_blob, uint32_t data_size);
+    };
+};
